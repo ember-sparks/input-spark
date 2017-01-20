@@ -1,6 +1,6 @@
 # {{input-spark}}
 
-My cool Ember Spark! Edit this text in the README.md
+A replacement for \<input\>
 
 <http://www.ember-sparks.com/>
 
@@ -8,20 +8,16 @@ My cool Ember Spark! Edit this text in the README.md
 
 ## Installation and usage
 
-Install the Ember Sparks addon:
+Install the Ember Sparks addon (this components is part of the standard library)
 ```bash
 ember install ember-sparks
 ```
 
-Install input-spark:
-
-```bash
-ember install ember-input-spark
-```
-
 Now restart your Ember app and drop the component in there!
 ```handlebars
-{{input-spark}}
+{{input-spark
+  placeholder="Start typing"
+}}
 ```
 
 ## Properties
@@ -40,11 +36,11 @@ Now restart your Ember app and drop the component in there!
 
 ## Block version
 
-If your spark can be used as a "block", describe its usage here:
+If you use the blocking version of the component, you can prepend an icon to the input. This could be an element with a class from an icon font, or an `img`-tag, but we recommend SVG:
 
 ```handlebars
 {{#input-spark}}
-  Hello world!
+  <svg></svg>
 {{/input-spark}}
 ```
 
@@ -55,15 +51,39 @@ To see these examples in action, check out the interactive documentation.
 
 <em>**Important!** All classes are local in order to avoid naming collisions and unintended CSS side effects. To understand how to style them, check out the Ember Sparks documentation.</em>
 
-- `.text`
+- `.input`
 
-  Describe what this element or class does in the component, and if there are any classes that are appended to it that can also be styled.
-  This can be edited in the README.md.
+  The input box that the user interacts in.
+  If the input is focused, the class `.focused` is appended to it.
+  If the error bubble is showing, the class `.has-error` is appended to it.
 
   **Example:**
   ```css
-  .text {
-    color: red;
+  .input {
+    background-color: #ffd9d5;
+  }
+  ```
+  
+- `.prefix`
+
+  Style the prefix
+
+  **Example:**
+  ```css
+  .prefix {
+    color: blue;
+  }
+  ```
+
+- `.error`
+
+  Style the error box
+
+  **Example:**
+  ```css
+  .prefix {
+    background-color: #ffdc30;
+    color: #af7c38;
   }
   ```
   

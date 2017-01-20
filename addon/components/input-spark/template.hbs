@@ -1,8 +1,19 @@
+{{#if label}}
+  <span 
+    local-class="
+      {{spark 'label'}}
+      {{if value (spark 'visible')}}
+    "
+  >
+    {{_inputLabel}}
+  </span>
+{{/if}}
+
 <span 
   local-class="
     {{spark 'input'}}
-    {{if isFocused (spark 'focused')}}
-    {{if showError (spark 'has-error')}}
+    {{if _isFocused (spark 'focused')}}
+    {{if _showError (spark 'has-error')}}
   "
   {{action "focus"}}
 >
@@ -19,27 +30,29 @@
     </span>
   {{/if}}
 
-  {{input
-    type=type
-    local-class=(spark 'core-input')
-    name=name 
-    placeholder=placeholder 
-    value=value
-    autofocus=autofocus 
-    maxlength=maxlength
-    focus-in=(action "didFocus")
-    focus-out=(action "didFocusOut")
-    key-up=(action "didKeyUp")
-  }}
+  <input
+    type={{type}}
+    local-class="
+      {{spark 'core-input'}}
+      {{if _isFocused (spark 'focused')}}
+    }}"
+    name={{name}}
+    placeholder={{placeholder}}
+    value={{value}}
+    autofocus={{autofocus}}
+    maxlength={{maxlength}}
+    onfocus={{action "onFocus"}}
+    onblur={{action "onFocusOut"}}
+    onkeyup={{action "onKeyUp"}}
+  />
 
 </span>
 
-{{#if showError}}
+{{#if _showError}}
   {{component errorComponent
     local-class=(spark 'error')
     error=error
     scrollOnError=scrollOnError
   }}
 {{/if}}
-  
 

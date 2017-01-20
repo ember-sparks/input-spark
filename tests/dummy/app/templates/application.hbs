@@ -3,7 +3,12 @@
 }}
 
   {{input-spark
+    placeholder=demo.placeholder
     value=demo.value
+    prefix=demo.prefix
+    label=demo.label
+    error=demo.error
+    onKeyUp=(action (mut demo.value))
   }}
 
 {{/spark-page}}

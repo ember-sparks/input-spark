@@ -1,9 +1,20 @@
 import Ember from 'ember';
-let { $ } = Ember;
 import layout from './template';
 import styles from './styles';
 
-import SparkComponent from '../../spark-component';
+import SparkComponent from 'ember-sparks/components/spark-component';
+
+const {
+  $,
+  computed,
+  observer,
+  on,
+  run: { 
+    later,
+    scheduleOnce,
+  },
+  RSVP: { Promise },
+} = Ember;
 
 export default SparkComponent.extend({
   layout,
@@ -11,23 +22,21 @@ export default SparkComponent.extend({
 
   tagName: 'span',
 
-  error: null,
-  errorMessage: null,
-  scrollOnError: true,
+  _errorMessage: null,
 
   localClassNameBindings: [
     'visible',  
   ],
 
-  visible: Ember.computed('error', 'errorMessage', function() {
+  visible: computed('error', '_errorMessage', function() {
     let error = this.get('error');
-    let errorMessage = this.get('errorMessage');
+    let errorMessage = this.get('_errorMessage');
 
     return error && errorMessage;
   }),
 
-  errorDidChange: Ember.on('init', Ember.observer('error', function() {
-    Ember.run.scheduleOnce('afterRender', () => {
+  errorDidChange: on('init', observer('error', function() {
+    scheduleOnce('afterRender', () => {
       this.handleError();
     });
   })),
@@ -39,21 +48,21 @@ export default SparkComponent.extend({
     if (!errMessage) { return; }
 
     if (shouldScroll === false) {
-      this.showError();
+      this._showError();
     } else {
-      this.scrollToError()
+      this._scrollToError()
       .then(() => {
-        this.showError();
+        this._showError();
       });
     }
   },
 
-  showError() {
+  _showError() {
     const DELAY = 100;
     let errMessage = this.get('error');
 
-    Ember.run.later((() => {
-      this.set('errorMessage', errMessage);
+    later((() => {
+      this.set('_errorMessage', errMessage);
     }), DELAY);
   },
 
@@ -61,11 +70,11 @@ export default SparkComponent.extend({
    * Scroll to error field
    * before showing error:
    */
-  scrollToError() {
+  _scrollToError() {
     const OFFSET = 200;
     const SCROLL_DURATION = 300;
 
-    return new Ember.RSVP.Promise((resolve) => {
+    return new Promise((resolve) => {
       let elPos = this.$().offset();
       let elPosTop = elPos && elPos.top;
 
