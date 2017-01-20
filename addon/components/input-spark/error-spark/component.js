@@ -28,11 +28,13 @@ export default SparkComponent.extend({
     'visible',  
   ],
 
-  visible: computed('error', '_errorMessage', function() {
-    let error = this.get('error');
-    let errorMessage = this.get('_errorMessage');
+  visible: computed('error', '_errorMessage', {
+    get() {
+      let error = this.get('error');
+      let errorMessage = this.get('_errorMessage');
 
-    return error && errorMessage;
+      return error && errorMessage;
+    },
   }),
 
   errorDidChange: on('init', observer('error', function() {

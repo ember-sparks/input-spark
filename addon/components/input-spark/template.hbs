@@ -13,6 +13,7 @@
   local-class="
     {{spark 'input'}}
     {{if _isFocused (spark 'focused')}}
+    {{if disabled (spark 'disabled')}}
     {{if _showError (spark 'has-error')}}
   "
   {{action "focus"}}
@@ -31,7 +32,7 @@
   {{/if}}
 
   <input
-    type={{type}}
+    type={{_inputType}}
     local-class="
       {{spark 'core-input'}}
       {{if _isFocused (spark 'focused')}}
@@ -39,11 +40,14 @@
     name={{name}}
     placeholder={{placeholder}}
     value={{value}}
-    autofocus={{autofocus}}
     maxlength={{maxlength}}
+    disabled="{{disabled}}"
     onfocus={{action "onFocus"}}
-    onblur={{action "onFocusOut"}}
+    onblur={{action "onBlur"}}
     onkeyup={{action "onKeyUp"}}
+    onkeydown={{action "onKeyDown"}}
+    oninput={{action "onInput"}}
+    onchange={{action "onChange"}}
   />
 
 </span>

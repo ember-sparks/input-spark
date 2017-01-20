@@ -5,6 +5,7 @@ import styles from './styles';
 import SparkComponent from 'ember-sparks/components/spark-component';
 
 const {
+  assert,
   computed,
   observer,
   on,
@@ -20,12 +21,22 @@ export default SparkComponent.extend({
    */
   value: null,
   prefix: null,
-  type: null,
+  type: "text",
   placeholder: null,
+  readonly: true,
   label: true,
   error: null,
   errorComponent: "input-spark/error-spark",
   scrollOnError: false,
+
+  VALID_TYPES: [
+    'text',
+    'email',
+    'search',
+    'tel',
+    'url',
+    'password',
+  ],
 
   /*
    * @private
@@ -34,15 +45,29 @@ export default SparkComponent.extend({
   _typingTimer: null,
   _typingInterval: 1000,
 
-  _inputLabel: computed('label', 'placeholder', function() {
-    let label = this.get('label');
-    let placeholder = this.get('placeholder');
+  _inputType: computed('type', {
+    get() {
+      let type = this.get('type');
 
-    if (typeof label === "string") {
-      return label;
-    } else if (label) {
-      return placeholder;
-    }
+      if (this.VALID_TYPES.indexOf(type) === -1) {
+        assert(`input-spark does not support type="${type}"!`); 
+      }
+
+      return type;
+    },
+  }),
+
+  _inputLabel: computed('label', 'placeholder', {
+    get() {
+      let label = this.get('label');
+      let placeholder = this.get('placeholder');
+
+      if (typeof label === "string") {
+        return label;
+      } else if (label) {
+        return placeholder;
+      }
+    },
   }),
 
   valueDidChange: observer('value', function() {
@@ -93,9 +118,9 @@ export default SparkComponent.extend({
       this.sendAction('onFocus', ...arguments);
     },
 
-    onFocusOut() {
+    onBlur() {
       this.set('_isFocused', false);
-      this.sendAction('onFocusOut', ...arguments);
+      this.sendAction('onBlur', ...arguments);
     },
 
     onKeyUp(e) {
@@ -106,8 +131,25 @@ export default SparkComponent.extend({
       if (e.key === "Enter") {
         this.sendAction('onEnter', value, e);
       }
+    },
+
+    onKeyDown(e) {
+      let value = e.target.value;
+
+      this.sendAction('onKeyDown', value, e);
+    },
+
+    onInput(e) {
+      let value = e.target.value;
+
+      this.sendAction('onInput', value, e);
 
       this._startTypingTimer();
+    },
+
+    onChange(e) {
+      let value = e.target.value;
+      this.sendAction('onChange', value, e);
     },
 
   },
