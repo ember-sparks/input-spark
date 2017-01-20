@@ -1,0 +1,33 @@
+@value error-bg: #F05A5C;
+@value error-color: white;
+@value error-carret-size: 5px;
+
+._container {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  border-color: inherit;
+
+  /*
+   * This is an ugly way of creating a caret,
+   * but at least it inherits the background-color!
+   */
+  &::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 0px 100% 100% 100%;
+    left: 50%;
+    top: -2px;
+    transform: translateX(-50%) rotate(45deg);
+    background-color: inherit;
+  }
+
+  &.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+

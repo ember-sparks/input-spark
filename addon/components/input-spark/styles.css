@@ -1,0 +1,118 @@
+@value box-shadow-position: 0 0 0 1px;
+@value box-shadow-color: rgba(0, 0, 0, 0.16);
+@value box-shadow-color-hover: rgba(0, 0, 0, 0.22);
+@value box-shadow-color-focus: #93ccee;
+
+@value error-bg, error-color from './error-spark/styles';
+
+._container {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  max-width: 100%;
+}
+
+/*
+ * We use a virtual input to make it
+ * seem like things like "prefix" are
+ * part of the "real" input:
+ */
+._input {
+  display: flex;
+  background-color: white;
+  white-space: nowrap;
+  text-align: left;
+  border-radius: 2px;
+  border: none;
+  color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: box-shadow-position box-shadow-color;
+  cursor: text;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: box-shadow-position box-shadow-color-hover;
+  }
+
+  &._focused {
+    box-shadow: box-shadow-position box-shadow-color-focus;
+    box-shadow: box-shadow-position box-shadow-color-focus, 0 0 0 3px #d5ecfb;
+    outline: none;
+  }
+}
+
+/*
+ * This is the "real" input,
+ * but we've removed all the default
+ * styling:
+ */
+._core-input {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  background-color: transparent;
+  text-align: left;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font-weight: inherit;
+  text-transform: none;
+  width: 100%;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+._icon {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  margin-left: 8px;
+  margin-right: -4px;
+  pointer-events: none;
+
+  & ~ ._core-input {
+    padding-left: 8px;
+  }
+}
+
+._prefix,
+._core-input {
+  display: inline-block;
+  font-size: inherit;
+  padding: 8px 12px; 
+}
+
+._prefix {
+  padding-right: 0;
+  color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+
+  & + ._core-input {
+    padding-left: 0;
+  }
+}
+
+._error {
+  position: absolute;
+  background-color: error-bg;
+  color: error-color;
+  bottom: -100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  white-space: nowrap;
+  padding: 8px 16px;
+  border-radius: 3px;
+  font-size: 15px;
+
+  /*
+   * The rest of the (unthemable) styles are defined
+   * in error-spark-component
+   */
+}
+

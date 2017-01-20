@@ -1,0 +1,45 @@
+<span 
+  local-class="
+    {{spark 'input'}}
+    {{if isFocused (spark 'focused')}}
+    {{if showError (spark 'has-error')}}
+  "
+  {{action "focus"}}
+>
+
+  {{#if hasBlock}}
+    <span local-class={{spark 'icon'}}>
+      {{yield}}
+    </span>
+  {{/if}}
+
+  {{#if prefix}}
+    <span local-class={{spark 'prefix'}}>
+      {{prefix}}
+    </span>
+  {{/if}}
+
+  {{input
+    type=type
+    local-class=(spark 'core-input')
+    name=name 
+    placeholder=placeholder 
+    value=value
+    autofocus=autofocus 
+    maxlength=maxlength
+    focus-in=(action "didFocus")
+    focus-out=(action "didFocusOut")
+    key-up=(action "didKeyUp")
+  }}
+
+</span>
+
+{{#if showError}}
+  {{component errorComponent
+    local-class=(spark 'error')
+    error=error
+    scrollOnError=scrollOnError
+  }}
+{{/if}}
+  
+
