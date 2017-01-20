@@ -24,14 +24,14 @@ Now restart your Ember app and drop the component in there!
 
 | Name        | Type   | Default | Description                                                      |
 |-------------|--------|---------|------------------------------------------------------------------|
-| text        | string | `null`  | Describe the property here. This can be edited in the README.md  |
+| `text`      | string | `null`  | Describe the property here. This can be edited in the README.md  |
 
 
 ## Actions
 
 | Name        | Description                                                                         |
 |-------------|-------------------------------------------------------------------------------------|
-| onKeyUp     | Describe your action here. This can be edited in the README.md                      | 
+| `onKeyUp`   | Describe your action here. This can be edited in the README.md                      | 
 
 
 ## Block version
