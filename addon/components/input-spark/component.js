@@ -24,6 +24,7 @@ export default SparkComponent.extend({
   type: "text",
   placeholder: null,
   readonly: true,
+  disabled: false,
   label: true,
   error: null,
   errorComponent: "input-spark/error-spark",
