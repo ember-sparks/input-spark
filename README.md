@@ -2,7 +2,7 @@
 
 A replacement for \<input\>
 
-<http://www.ember-sparks.com/>
+<https://ember-sparks.github.io/>
 
 ----
 
@@ -64,7 +64,7 @@ If you use the blocking version of the component, you can set an icon at the beg
 
 ## Theming
 
-To see these examples in action, check out the [interactive documentation](http://ember-sparks.com/input-spark/).
+To see these examples in action, check out the [interactive documentation](https://ember-sparks.github.io/input-spark/).
 
 <em>**Important!** All classes are local in order to avoid naming collisions and unintended CSS side effects. To understand how to style them, check out the Ember Sparks documentation.</em>
 
@@ -133,4 +133,4 @@ To see these examples in action, check out the [interactive documentation](http:
   
 ## Contributing
 
-Check out the guidelines at http://ember-sparks.com/docs#contribute
+Check out the guidelines at https://ember-sparks.github.io/docs#contribute
