@@ -23,7 +23,7 @@ export default SparkComponent.extend({
   prefix: null,
   type: "text",
   placeholder: null,
-  readonly: true,
+  readOnly: false,
   disabled: false,
   label: true,
   error: null,
